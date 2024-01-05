@@ -74,7 +74,6 @@ func ReplaceString(orgStr string,data map[string]interface{})(string,bool){
 	//识别出过滤参数中的
 	re := regexp.MustCompile(`%{([A-Z|a-z|_|0-9|.]*)}`)
 	replaceItems:=re.FindAllStringSubmatch(orgStr,-1)
-	fmt.Println("ReplaceString replaceItems",replaceItems)
 	replaced:=false
 	if replaceItems!=nil {
 		for _,replaceItem:=range replaceItems {
@@ -93,7 +92,6 @@ func getReplaceString(path string,data map[string]interface{})(string){
 	//将value转为豆号分割的字符串
 	if len(values)>0 {
 		valueStr:=strings.Join(values, "\",\"")
-		fmt.Println("将value转为豆号分割的字符串","valueStr",valueStr)
 		return valueStr
 	}
 	return path
@@ -104,7 +102,7 @@ func getPathData(path []string,level int,data map[string]interface{},values *[]s
 
 	dataNode,ok:=data[pathNode]
 	if !ok {
-		fmt.Println("getPathData no pathNode ","pathNode",pathNode)
+		fmt.Println("getPathData no pathNode ",path,level,pathNode)
 		return
 	}
 
@@ -127,7 +125,6 @@ func getPathData(path []string,level int,data map[string]interface{},values *[]s
 		}
 	} else {
 		//如果不是最后一级，则数据中应该存在list属性
-		fmt.Println("getPathData dataNode type is", reflect.TypeOf(dataNode))
 		result,ok:=dataNode.(map[string]interface{})
 		if !ok {
 			fmt.Println("getPathData dataNode is not a map[string]interface{} ")
