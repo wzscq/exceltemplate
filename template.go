@@ -103,7 +103,7 @@ func getReplaceString(path string, data map[string]interface{}) string {
 		valueStr := strings.Join(values, "\",\"")
 		return valueStr
 	}
-	return path
+	return ""
 }
 
 func getPathData(path []string, level int, data map[string]interface{}, values *[]string) {
