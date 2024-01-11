@@ -13,10 +13,12 @@ import (
 	"strings"
 )
 
-// GetExcelFromTemplate read the templateFile and replace the template with data and return the excel file.
-// templateFile: the template file path
-// data: the data to replace the template
-// return: the excelize file instance
+/* 
+GetExcelFromTemplate reads each cell in templateFile, 
+then calls ReplaceString to replace the content string of that cell. 
+Afterwards, the function sets the replaced string back to the cell, 
+and finally returns the replaced excelize.File object.
+*/
 func GetExcelFromTemplate(templateFile string, data map[string]interface{}) (*excelize.File, error) {
 	//读取tempalteFile
 	f, err := excelize.OpenFile(templateFile)
@@ -79,6 +81,10 @@ func processCell(f *excelize.File, sheetName, cellName, cellValue string, data m
 	return nil
 }
 
+/* 
+ReplaceString is used by GetExcelFromTemplate to replace the individual cell string of the template and can also be used independently. 
+It returns the replaced string along with a bool value, indicating whether orgStr has been replaced.
+*/
 func ReplaceString(orgStr string, data map[string]interface{}) (string, bool) {
 	//识别出过滤参数中的
 	re := regexp.MustCompile(`%{([A-Z|a-z|_|0-9|.]*)}`)
