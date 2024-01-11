@@ -1,24 +1,24 @@
 package exceltemplate
 
 import (
-	"testing"
 	"fmt"
+	"testing"
 )
 
 func TestReplaceString(t *testing.T) {
 	orgStr := "%{greet} %{person.id}, my name is %{person.name}"
 	data := map[string]interface{}{
-		"greet":  "hello",
+		"greet": "hello",
 		"person": map[string]interface{}{
-			"list":[]interface{}{
+			"list": []interface{}{
 				map[string]interface{}{
-					"id": 1, 
+					"id":   1,
 					"name": "zhangsan",
 				},
 			},
 		},
 	}
-	repalcedStr,replaced := ReplaceString(orgStr, data)
+	repalcedStr, replaced := ReplaceString(orgStr, data)
 	fmt.Println(replaced)
 	fmt.Println(orgStr)
 	fmt.Println(repalcedStr)
@@ -31,20 +31,20 @@ func TestReplaceString(t *testing.T) {
 	}
 }
 
-func TestGetExcelFromTemplate(t *testing.T){
-	filename:=`./fortest.xlsx`
+func TestGetExcelFromTemplate(t *testing.T) {
+	filename := `./fortest.xlsx`
 	data := map[string]interface{}{
-		"greet":  "hello",
+		"greet": "hello",
 		"person": map[string]interface{}{
-			"list":[]interface{}{
+			"list": []interface{}{
 				map[string]interface{}{
-					"id": 1, 
+					"id":   1,
 					"name": "zhangsan",
 				},
 			},
 		},
 	}
-	f,err:=GetExcelFromTemplate(filename,data)
+	f, err := GetExcelFromTemplate(filename, data)
 	if err != nil {
 		fmt.Println(err)
 		t.Errorf("GetExcelFromTemplate failed")
